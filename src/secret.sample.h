@@ -1,3 +1,5 @@
+
+
 /*
  * This file is part of the  distribution (https://github.com/wifi-drone-esp32 or http://wifi-drone-esp32.github.io).
  * Copyright (c) 2019 Michal Schwarz.
@@ -13,38 +15,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
-#include "Arduino.h"
-#include "controller.h"
+#ifndef Secret_h
+#define Secret_h
 
-Controller controller;
+#define WIFI_SSID "replace-me"
+#define WIFI_PASSWORD "replace-me"
+
+#endif
 
 
-void Controller::begin(void)
-{
-  ibus.begin(Serial);
-  wifi.begin(onControlEvent);
-}
-
-void Controller::loop(void) {
-  controller.currentMillis = millis();
-  if (controller.currentMillis - controller.wifiRecievedMillis >= WIFI_FAIL_TIMEOUT_MS) {
-    ibus.disable();
-  } else {
-    ibus.enable();
-  }
-  wifi.loop();
-  ibus.loop();
-}
-
-void Controller::updateControlValues(uint8_t list[Ibus::IBUS_CHANNELS_COUNT*2]) {
-  controller.wifiRecievedMillis = millis();
-  ibus.setControlValuesList(list);
-}
-
-void Controller::onControlEvent(uint8_t list[Ibus::IBUS_CHANNELS_COUNT*2])
-{
-  updateControlValues(list);
-}

@@ -20,11 +20,19 @@
 #define Wifi_h
 
 #include "Arduino.h"
-#include "secret.h"
 #include "ibus.h"
 #include "index_html.h"
 #include <WiFi.h>
 #include <WebServer.h>
+
+// wifi config, or defaults.
+#if __has_include("secret.h")
+    #include "secret.h"
+#else
+    #warning "Using Defaults: Copy secret.sample.h to secret.h and edit that to use your own settings"
+    #define WIFI_SSID "replace-me"
+    #define WIFI_PASSWORD "replace-me"
+#endif
 
 class Wifi {
   public:

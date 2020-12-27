@@ -30,3 +30,13 @@ It creates an interface between the WiFi (WebSocket) and IBus bus.
 5. Connect IBus reciever to ESP-32, pin 27 (GPIO17, TX2).
 
 6. Compile and upload this project to ESP-32.
+
+## Planed modifications to build an FPV Drone:
+### Done:
+* Add platformio support
+* Use esp32cam module
+* Disable debug messages and change serial port to UART0
+### ToDo:
+* Add libs for reading images from CAM
+* Display video stream in control html
+* Add video capture capability to store video on sd card
